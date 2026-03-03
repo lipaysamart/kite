@@ -275,6 +275,13 @@
       "users": "User"
     }
   },
+  "globalSidebar": {
+    "title": "Global Sidebar Configuration",
+    "description": "Configure the default sidebar for all users. Users can still customize their own sidebar.",
+    "saved": "Global sidebar config saved",
+    "saveError": "Failed to save config",
+    "resetInfo": "Reset to default - click Save to apply"
+  },
   "settingsHint": {
     "title": "Complete Your Setup",
     "description": "Configure essential settings to get the most out of Kite",

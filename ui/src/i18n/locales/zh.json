@@ -299,6 +299,13 @@
       "apikeys": "API 密钥"
     }
   },
+  "globalSidebar": {
+    "title": "全局侧边栏配置",
+    "description": "为所有用户配置默认侧边栏。用户仍可自定义自己的侧边栏。",
+    "saved": "全局侧边栏配置已保存",
+    "saveError": "保存配置失败",
+    "resetInfo": "已重置为默认值 - 点击保存以应用"
+  },
   "settingsHint": {
     "title": "完成设置",
     "description": "配置基本设置以获得最佳体验",

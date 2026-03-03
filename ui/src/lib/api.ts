@@ -1770,3 +1770,16 @@ export const usePodFiles = (
     staleTime: 10000, // 10 seconds cache
   })
 }
+
+// Global Sidebar Config
+export const getGlobalSidebarConfig = async (): Promise<{ config: string }> => {
+  return await apiClient.get<{ config: string }>('/users/sidebar_global')
+}
+
+export const setGlobalSidebarConfig = async (
+  config: string
+): Promise<{ success: boolean }> => {
+  return await apiClient.post<{ success: boolean }>('/admin/sidebar/global', {
+    config,
+  })
+}

@@ -265,6 +265,35 @@ export const SidebarConfigProvider: React.FC<SidebarConfigProviderProps> = ({
       }
       return
     }
+
+    try {
+        const response = await fetch(
+          withSubPath('/api/users/sidebar_global'),
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+        }
+      )
+      if (response.ok) {
+        const data = await response.json()
+        if (data.config && data.config !== '') {
+          const globalConfig = JSON.parse(data.config)
+          setConfig(globalConfig)
+
+          const currentVersion = globalConfig.version || 0
+          if (currentVersion < CURRENT_CONFIG_VERSION) {
+            setHasUpdate(true)
+          }
+          return
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch global sidebar config:', error)
+    }
+
     setConfig(defaultConfigs())
   }, [user])
 

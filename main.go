@@ -103,6 +103,7 @@ func setupAPIRouter(r *gin.RouterGroup, cm *cluster.ClusterManager) {
 	userGroup := r.Group("/api/users")
 	{
 		userGroup.POST("/sidebar_preference", authHandler.RequireAuth(), handlers.UpdateSidebarPreference)
+		userGroup.GET("/sidebar_global", authHandler.RequireAuth(), handlers.GetGlobalSidebarConfig)
 	}
 
 	// admin apis
@@ -165,6 +166,12 @@ func setupAPIRouter(r *gin.RouterGroup, cm *cluster.ClusterManager) {
 			templateAPI.POST("/", handlers.CreateTemplate)
 			templateAPI.PUT("/:id", handlers.UpdateTemplate)
 			templateAPI.DELETE("/:id", handlers.DeleteTemplate)
+		}
+
+		sidebarAPI := adminAPI.Group("/sidebar")
+		{
+			sidebarAPI.GET("/global", handlers.GetGlobalSidebarConfig)
+			sidebarAPI.POST("/global", handlers.SetGlobalSidebarConfig)
 		}
 	}
 

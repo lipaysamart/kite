@@ -224,3 +224,29 @@ func UpdateSidebarPreference(c *gin.Context) {
 	}
 	c.JSON(200, gin.H{"success": true})
 }
+
+func GetGlobalSidebarConfig(c *gin.Context) {
+	config, err := model.GetGlobalSidebarConfig()
+	if err != nil {
+		klog.Errorf("failed to get global sidebar config: %v", err)
+		c.JSON(500, gin.H{"error": "failed to get global sidebar config"})
+		return
+	}
+	c.JSON(200, gin.H{"config": config})
+}
+
+func SetGlobalSidebarConfig(c *gin.Context) {
+	var req struct {
+		Config string `json:"config" binding:"required"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	if err := model.SetGlobalSidebarConfig(req.Config); err != nil {
+		klog.Errorf("failed to set global sidebar config: %v", err)
+		c.JSON(500, gin.H{"error": "failed to set global sidebar config"})
+		return
+	}
+	c.JSON(200, gin.H{"success": true})
+}
